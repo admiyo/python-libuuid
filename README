@@ -1,0 +1,3 @@
+Python Native bindings for libuuid functions.
+
+This is a first step to removing ctypes usage in standard Python for SELinux based systems 
