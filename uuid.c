@@ -6,16 +6,17 @@ static char py_uuid_doc[] = "Python wrapper for libuuid";
 /*
  *
  */
-static void 
+static PyObject *
 py_uuid_generate (PyObject *self, PyObject *args) {
   uuid_t out;
   uuid_generate(out);
-  return Py_BuildValue("");
+
+  Py_RETURN_NONE;
 }
 
 
 
-  //void uuid_clear(uuid_t uu);
+//void uuid_clear(uuid_t uu);
 
 /* compare.c */
 //int uuid_compare(const uuid_t uu1, const uuid_t uu2);
@@ -25,3 +26,14 @@ py_uuid_generate (PyObject *self, PyObject *args) {
 
 /* gen_uuid.c */
 //void uuid_generate(uuid_t out)
+
+
+static PyMethodDef module_methods[] = {
+   { "uuid_generate", (PyCFunction)py_uuid_generate,METH_VARARGS, NULL },
+   { NULL, NULL, 0, NULL }
+};
+
+
+PyMODINIT_FUNC initModule() {
+   Py_InitModule3("libuuid", module_methods, "docstring...");
+}
