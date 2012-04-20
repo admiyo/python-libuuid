@@ -18,6 +18,10 @@ newUUID = libuuid.uuid_generate()
 print uuiddef.UUID(newUUID)
 
 
+newUUID = libuuid.uuid_generate_time()
+print uuiddef.UUID(newUUID)
+
+
 #libuuid.uuid_generate(uuiddef.UUID(int=0x12345678123456781234567812345678))
 
 

@@ -11,28 +11,39 @@ static const char py_uuid_doc[] = "Python wrapper for libuuid";
  */
 static PyObject *
 py_uuid_generate (PyObject *self, PyObject *args) {
-	char * uuid_str = "1b4e28ba-2fa1-11d2-883f-b9a761bde3fb";
+	char uuid_str[37];
 	uuid_t out;
   	uuid_generate(out);
-  	uuid_parse(uuid_str, out);
+  	uuid_unparse( out, uuid_str);
 	return PyString_FromString(uuid_str);	
 }
 
+static PyObject *
+py_uuid_generate_random(PyObject *self, PyObject *args) {
 
+	char uuid_str[37];
+	uuid_t out;
+  	uuid_generate_random(out);
+  	uuid_unparse( out, uuid_str);
+	return PyString_FromString(uuid_str);	
+}
 
-//void uuid_clear(uuid_t uu);
+static PyObject *
+py_uuid_generate_time(PyObject *self, PyObject *args) {
+	char uuid_str[37];
+	uuid_t out;
+  	uuid_generate_time(out);
+  	uuid_unparse( out, uuid_str);
+	return PyString_FromString(uuid_str);	
+}
 
-/* compare.c */
-//int uuid_compare(const uuid_t uu1, const uuid_t uu2);
+//int uuid_generate_time_safe(uuid_t out);
 
-/* copy.c */
-//void uuid_copy(uuid_t dst, const uuid_t src);
-
-/* gen_uuid.c */
-//void uuid_generate(uuid_t out)
 
 
 static PyMethodDef module_methods[] = {
+   { "uuid_generate_random", (PyCFunction)py_uuid_generate_random, METH_NOARGS, NULL },
+   { "uuid_generate_time", (PyCFunction)py_uuid_generate_time, METH_NOARGS, NULL },
    { "uuid_generate", (PyCFunction)py_uuid_generate, METH_NOARGS, NULL },
    { NULL, NULL, 0, NULL }
 };
