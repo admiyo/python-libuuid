@@ -37,10 +37,6 @@ py_uuid_generate_time(PyObject *self, PyObject *args) {
 	return PyString_FromString(uuid_str);	
 }
 
-//int uuid_generate_time_safe(uuid_t out);
-
-
-
 static PyMethodDef module_methods[] = {
    { "uuid_generate_random", (PyCFunction)py_uuid_generate_random, METH_NOARGS, NULL },
    { "uuid_generate_time", (PyCFunction)py_uuid_generate_time, METH_NOARGS, NULL },
@@ -48,7 +44,6 @@ static PyMethodDef module_methods[] = {
    { NULL, NULL, 0, NULL }
 };
 
-
-PyMODINIT_FUNC initlibuuid() {
-   Py_InitModule3("libuuid", module_methods, py_uuid_doc);
+PyMODINIT_FUNC init_uuid() {
+   Py_InitModule3("_uuid", module_methods, py_uuid_doc);
 }

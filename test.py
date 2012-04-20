@@ -1,25 +1,15 @@
 #!/usr/bin/python
 
 import  sys
-import uuiddef
-import libuuid
-
-#print uuiddef.UUID('{12345678-1234-5678-1234-567812345678}')
-#print uuiddef.UUID('12345678123456781234567812345678')
-##print uuiddef.UUID('urn:uuid:12345678-1234-5678-1234-567812345678')
-#print uuiddef.UUID(bytes='\x12\x34\x56\x78'*4)
-#print uuiddef.UUID(bytes_le='\x78\x56\x34\x12\x34\x12\x78\x56' +
-#                      '\x12\x34\x56\x78\x12\x34\x56\x78')
-#print uuiddef.UUID(fields=(0x12345678, 0x1234, 0x5678, 0x12, 0x34, 0x567812345678))
-#print uuiddef.UUID(int=0x12345678123456781234567812345678)
+import _uuid
 
 
-newUUID = libuuid.uuid_generate()
-print uuiddef.UUID(newUUID)
+newUUID = _uuid.uuid_generate()
+print newUUID
 
 
-newUUID = libuuid.uuid_generate_time()
-print uuiddef.UUID(newUUID)
+newUUID = _uuid.uuid_generate_time()
+print newUUID
 
 
 #libuuid.uuid_generate(uuiddef.UUID(int=0x12345678123456781234567812345678))
