@@ -1,17 +1,21 @@
 #include "Python.h"
 #include "uuid/uuid.h"
+#include <stdio.h>
+#include <string.h>
+#define TRACE() printf("%s:%s:%d\n",__FILE__,__FUNCTION__,__LINE__)
 
-static char py_uuid_doc[] = "Python wrapper for libuuid";
+static const char py_uuid_doc[] = "Python wrapper for libuuid";
 
 /*
  *
  */
 static PyObject *
 py_uuid_generate (PyObject *self, PyObject *args) {
-  uuid_t out;
-  uuid_generate(out);
-
-  Py_RETURN_NONE;
+	char * uuid_str = "1b4e28ba-2fa1-11d2-883f-b9a761bde3fb";
+	uuid_t out;
+  	uuid_generate(out);
+  	uuid_parse(uuid_str, out);
+	return PyString_FromString(uuid_str);	
 }
 
 
@@ -29,11 +33,11 @@ py_uuid_generate (PyObject *self, PyObject *args) {
 
 
 static PyMethodDef module_methods[] = {
-   { "uuid_generate", (PyCFunction)py_uuid_generate,METH_VARARGS, NULL },
+   { "uuid_generate", (PyCFunction)py_uuid_generate, METH_NOARGS, NULL },
    { NULL, NULL, 0, NULL }
 };
 
 
-PyMODINIT_FUNC initModule() {
-   Py_InitModule3("libuuid", module_methods, "docstring...");
+PyMODINIT_FUNC initlibuuid() {
+   Py_InitModule3("libuuid", module_methods, py_uuid_doc);
 }
